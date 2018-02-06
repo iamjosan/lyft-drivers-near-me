@@ -1,21 +1,24 @@
 {
-  "name": "lyft-app",
+  "name": "lyft-drivers-near-me",
   "version": "1.0.0",
-  "description": "making use of Lyft's API",
+  "description": "View Lyft drivers nearby using Lyft's API",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node index.js",
     "server": "nodemon index.js",
     "client": "node start-client.js"
   },
   "author": "Josan Iracheta",
   "license": "ISC",
+  "engines": {
+    "node": "^8.1.2"
+  },
   "dependencies": {
     "@google/maps": "^0.4.5",
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "node-lyft": "file:../lyft-node-sdk",
+    "node-lyft": "lyft/lyft-node-sdk",
     "path": "^0.12.7",
     "socket.io": "^2.0.4"
   },
