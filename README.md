@@ -1,6 +1,7 @@
 # Lyft Drivers Near Me
 
-View all of the active Lyft drivers in your area.
+View all of the active Lyft drivers in your area. You can view the live app
+here: http://lyft-drivers-near-me.herokuapp.com/
 
 ## Description
 

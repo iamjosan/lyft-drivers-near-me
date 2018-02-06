@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
+/*
 const socket = io("http://localhost:3000", {
   reconnectionDelay: 1000,
   reconnection: true,
@@ -9,6 +10,8 @@ const socket = io("http://localhost:3000", {
   upgrade: false,
   rejectUnauthorized: false
 });
+*/
+const socket = io();
 import icon from "./small-car-icon--80w.png";
 import Navbar from "./Navbar";
 import Loading from "./Loading";
