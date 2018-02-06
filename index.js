@@ -56,7 +56,5 @@ socket.on("connection", client => {
 app.use("/", express.static(path.join(__dirname, "/views/dist")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-server.listen(process.env.PORT || 3000, () =>
-  console.log("Listening on Port 3000")
-);
+const port = process.env.PORT || 3000;
+server.listen(port, () => console.log("Listening on Port: ", port));
