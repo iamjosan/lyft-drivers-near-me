@@ -1,0 +1,78 @@
+<!doctype html>
+	<head>
+		<title>My Lyft App</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<style>
+			#google-map{
+				width:100%;
+				height:400px;
+				}
+			form{
+				display:none;
+				}
+		</style>
+	</head>
+	<body>
+		<div id="google-map"></div>
+		<form method="post">
+			<input type="text" name="lat" />
+			<input type="text" name="lng" />
+		</form>
+		<script>
+		var myData = <%- data %>;
+		var myLocation = <%- myLocation %>;
+		console.log(myData)
+		function initMap(){
+			var myMap = new google.maps.Map(
+			document.querySelector('#google-map'),
+			{
+				zoom: 14,
+				center: {
+					lat: Number(myLocation.lat),
+					lng: Number(myLocation.lng)
+					},
+				disableDoubleClickZoom: true,
+				title: 'My Map'
+				});
+			var yourLocation = new google.maps.Marker({
+				position: {
+					lat: Number(myLocation.lat),
+					lng: Number(myLocation.lng)
+					},
+				map: myMap,
+				label: 'You'
+				});
+			myData.nearby_drivers.forEach(drivers => {
+				drivers.drivers.forEach(location => {
+					location.locations.forEach(coord => {
+						new google.maps.Marker({
+							position: coord,
+							map: myMap,
+							icon: '/small-car-icon--80w.png'
+							})
+						})
+					})
+				});
+				google.maps.event.addListener(myMap, 'dblclick', function(e){
+					//create a new marker
+					new google.maps.Marker({
+						position: {
+							lat: e.latLng.lat(),
+							lng: e.latLng.lng()
+							},
+						map: myMap
+						})
+					//pass lat and lng to form
+					var myForm = document.querySelector('form');
+					myForm.querySelector('input[name="lat"]').value = e.latLng.lat();
+					myForm.querySelector('input[name="lng"]').value = e.latLng.lng();
+					//submit the form
+					myForm.submit();
+					});
+			}
+		</script>
+		<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJt2d_Tob5xuyl2Y5gAJjBggaVjv0cHpw&callback=initMap">
+    </script>
+	</body>
+</html>
